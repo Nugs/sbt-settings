@@ -30,7 +30,6 @@ object Defaults extends AutoPlugin {
   object autoImports {
     val defaultsTargetJvm = settingKey[Boolean]("Target Jvm")
     val defaultsBuildShellPrompt = settingKey[(State) => String]("Build shell prompt")
-    val defaultsAddScalaTestReports = settingKey[Boolean]("Add scalatest report")
   }
 
   import autoImports._
@@ -38,8 +37,6 @@ object Defaults extends AutoPlugin {
   lazy val defaultsSettings: Seq[Def.Setting[_]] = {
 
     defaultsBuildShellPrompt := ShellPrompt.buildShellPrompt(version.value)
-
-    defaultsAddScalaTestReports := true
 
     Seq(
       scalaVersion := "2.11.1",
@@ -58,7 +55,6 @@ object Defaults extends AutoPlugin {
       parallelExecution in Test := false,
       fork in Test := false,
       isSnapshot := version.value.contains("SNAPSHOT"),
-      defaultsAddScalaTestReports := true,
       testOptions in Test += addTestReportOption()
     ) ++ gitStampSettings ++ graphSettings
   }
