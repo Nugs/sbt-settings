@@ -63,4 +63,5 @@ object Defaults extends AutoPlugin {
     Tests.Argument("-o", "-u", testResultDir, "-h", testResultDir + "/html-report")
   }
 
+  override lazy val buildSettings = inConfig(Compile)(defaultsSettings)
 }
