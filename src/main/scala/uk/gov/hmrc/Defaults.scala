@@ -28,15 +28,14 @@ object Defaults extends AutoPlugin {
   override def trigger: PluginTrigger = allRequirements
 
   object autoImports {
-    val defaultsTargetJvm = settingKey[Boolean]("Target Jvm")
-    val defaultsBuildShellPrompt = settingKey[(State) => String]("Build shell prompt")
+    val defaultsTargetJvm = settingKey[String]("Target Jvm")
   }
 
   import autoImports._
 
   lazy val defaultsSettings: Seq[Def.Setting[_]] = {
 
-    defaultsBuildShellPrompt := ShellPrompt.buildShellPrompt(version.value)
+    defaultsTargetJvm := "jvm-1.8"
 
     Seq(
       scalaVersion := "2.11.1",
@@ -51,7 +50,7 @@ object Defaults extends AutoPlugin {
       ),
       retrieveManaged := true,
       initialCommands in console := "import " + organization + "._",
-      shellPrompt := defaultsBuildShellPrompt.value,
+      shellPrompt := ShellPrompt.buildShellPrompt(version.value),
       parallelExecution in Test := false,
       fork in Test := false,
       isSnapshot := version.value.contains("SNAPSHOT"),
