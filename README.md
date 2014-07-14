@@ -14,7 +14,7 @@ Some of the defaults set on ```sbt.Keys``` are detailed:
 
 In your project/plugins.sbt:
 
-For AutoPlugin & sbt versions +0.13.5
+For AutoPlugin (sbt +0.13.5)
 
 ```scala
 addSbtPlugin("uk.gov.hmrc" % "sbt-utils" % "2.0.0")
