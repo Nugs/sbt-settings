@@ -27,7 +27,7 @@ object DefaultsPlugin extends AutoPlugin with ScalaTestSettings {
   override def trigger: PluginTrigger = allRequirements
 
   object autoImports {
-    val defaultsTargetJvm = settingKey[String]("Target Jvm")
+    lazy val defaultsTargetJvm = settingKey[String]("Target Jvm")
   }
 
   import autoImports._
@@ -50,7 +50,6 @@ object DefaultsPlugin extends AutoPlugin with ScalaTestSettings {
       retrieveManaged := true,
       initialCommands in console := "import " + organization + "._",
       shellPrompt := ShellPrompt.buildShellPrompt(version.value),
-      parallelExecution in Test := false,
       fork in Test := false,
       isSnapshot := version.value.contains("SNAPSHOT"),
       testOptions in Test += addTestReportOption()
