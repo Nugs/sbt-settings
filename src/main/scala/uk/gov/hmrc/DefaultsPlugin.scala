@@ -32,7 +32,7 @@ object DefaultsPlugin extends AutoPlugin with ScalaTestSettings {
 
   import autoImports._
 
-  lazy val defaultsSettings: Seq[Def.Setting[_]] = {
+  private lazy val defaultsSettings: Seq[Def.Setting[_]] = {
 
     defaultsTargetJvm := "jvm-1.8"
 
