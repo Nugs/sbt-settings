@@ -19,10 +19,9 @@ import sbt._
 import sbt.Keys._
 import sbt.plugins.JvmPlugin
 
-object Defaults extends AutoPlugin {
+object DefaultsPlugin extends AutoPlugin with ScalaTestSettings {
 
   import uk.gov.hmrc.GitStampPlugin._
-  import net.virtualvoid.sbt.graph.Plugin.graphSettings
 
   override def requires: Plugins = JvmPlugin
   override def trigger: PluginTrigger = allRequirements
@@ -44,7 +43,7 @@ object Defaults extends AutoPlugin {
         "-deprecation",
         "-Xlint",
         "-language:_",
-        "-target:" + defaultsTargetJvm,
+        "-target:" + defaultsTargetJvm.value,
         "-Xmax-classfile-name", "100",
         "-encoding", "UTF-8"
       ),
@@ -55,13 +54,18 @@ object Defaults extends AutoPlugin {
       fork in Test := false,
       isSnapshot := version.value.contains("SNAPSHOT"),
       testOptions in Test += addTestReportOption()
-    ) ++ gitStampSettings ++ graphSettings
+    ) ++ gitStampSettings
   }
+
+  override lazy val buildSettings = inConfig(Compile)(defaultsSettings)
+}
+
+trait ScalaTestSettings {
 
   def addTestReportOption(directory: String = "test-reports") = {
     val testResultDir = "target/" + directory
     Tests.Argument("-o", "-u", testResultDir, "-h", testResultDir + "/html-report")
   }
-
-  override lazy val buildSettings = inConfig(Compile)(defaultsSettings)
 }
+
+object ScalaTestSettings extends ScalaTestSettings

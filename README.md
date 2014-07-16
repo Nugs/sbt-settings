@@ -4,7 +4,7 @@ sbt-utils
 SBT plugin that provides common utility functions and configurations
 
 ### Features
-* **Defaults** This will provide some useful default configurations as an ```AutoPlugin``` which requires the ```JvmPlugin```.
+* **DefaultsPlugin** This will provide some useful default configurations as an ```AutoPlugin``` which requires the ```JvmPlugin```.
 Some of the defaults set on ```sbt.Keys``` are detailed:
     * ```shellPrompt``` set to use ```uk.gov.hmrc.ShellPrompt```
     * ```testOptions``` set to use [ScalaTest](http://www.scalatest.org/) with arguments to produce html test report

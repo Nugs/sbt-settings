@@ -22,7 +22,7 @@ trait PublishingSettings {
 
   val sbtCredentials = Credentials(Path.userHome / ".sbt" / ".credentials")
 
-  def publishToSettings(snapshots : MavenRepository, releases : MavenRepository) = publishTo <<= version {
+  def publishToSettings(snapshots : Resolver, releases : Resolver) = publishTo <<= version {
     (v: String) =>
       if (v.trim.endsWith("SNAPSHOT"))
         Some(snapshots)
